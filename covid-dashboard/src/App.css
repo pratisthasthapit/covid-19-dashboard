@@ -2,3 +2,20 @@
   text-align: center;
   margin: 2rem;
 }
+
+.img{
+  height: 10rem;
+}
+
+.text{
+  width: 75%;
+  margin: auto;
+}
+
+.container{
+  width: 75%;
+}
+
+.flag-img{
+  width: 40px;
+}

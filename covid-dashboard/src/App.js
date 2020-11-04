@@ -6,6 +6,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import Table from 'react-bootstrap/Table'
 import Form from "react-bootstrap/Form"
 import axios from "axios";
+import covid from './covid.png';
 
 function App() {
   const[latest, setLatest] = useState([]);
@@ -38,7 +39,9 @@ function App() {
   const tableData = filterCountries.map((data, i) => {
     return(
           <tr key={i}>
-            <td><div img="{data.countryInfo.flag}"></div></td>
+            <td>
+              <div> <img className="flag-img" src={data.countryInfo.flag} alt=""/></div>
+            </td>
             <td>{data.country}</td>
             <td>{data.cases}</td>
             <td>{data.active}</td>
@@ -56,12 +59,21 @@ function App() {
     query: 'min-width: 1000px'
   }];
 
+  const covidImg = <img className="img" src={covid} alt="Covid image"/>;
+
   return(
   <div className="App">
       <br/>
-      <h2 style={{textAlign: "center"}}>COVID-19 Dashboard</h2>
+      <h2>COVID-19 Dashboard</h2>
       <br/>
-
+      {covidImg}
+      <p className="text">
+        Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
+      <br/>
+      The following data has been recently updated at: {latest.cases}
+      </p>
+      <br/>
+      <div className="container">
       <CardDeck>
         <Card 
           className="text-center" 
@@ -114,6 +126,8 @@ function App() {
       </CardDeck>
 
       <br/>
+      <br/>
+      <br/>
       <Form>
         <Form.Group controlId="formGroupSearch">
           <Form.Control 
@@ -140,6 +154,7 @@ function App() {
         <br/>
         <tbody>{tableData}</tbody>
       </Table>
+      </div>
     </div>
   );
 }
