@@ -4,11 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from 'react-bootstrap/Card';
 import CardDeck from "react-bootstrap/CardDeck";
 import Table from 'react-bootstrap/Table'
+import Form from "react-bootstrap/Form"
 import axios from "axios";
 
 function App() {
   const[latest, setLatest] = useState([]);
   const[results, setResults] = useState([]);
+  const[searchCountries, setSearchCountries] = useState("");
 
   useEffect(() => {
     axios
@@ -29,7 +31,11 @@ function App() {
   const date = new Date(parseInt(latest.updated));
   const lastUpdated = date.toString();
 
-  const tableData = results.map((data, i) => {
+  const filterCountries = results.filter(item => {
+    return searchCountries !== "" ? item.country.includes(searchCountries) :item;
+  });
+
+  const tableData = filterCountries.map((data, i) => {
     return(
           <tr key={i}>
             <td><div img="{data.countryInfo.flag}"></div></td>
@@ -41,6 +47,14 @@ function App() {
           </tr>
     )}
   );
+
+  var queries =[{
+    columns: 2,
+    query: 'min-width: 500px'
+  }, {
+    columns: 3,
+    query: 'min-width: 1000px'
+  }];
 
   return(
   <div className="App">
@@ -98,6 +112,19 @@ function App() {
           </Card.Footer>
         </Card>
       </CardDeck>
+
+      <br/>
+      <Form>
+        <Form.Group controlId="formGroupSearch">
+          <Form.Control 
+          type="text" 
+          placeholder="Search country"
+          onChange = {
+            e => setSearchCountries(e.target.value)
+          } />
+        </Form.Group>
+      </Form>
+
       <br/>
       <Table striped bordered hover size="sm">
         <thead>
