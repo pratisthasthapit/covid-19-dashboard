@@ -29,6 +29,18 @@ function App() {
   const date = new Date(parseInt(latest.updated));
   const lastUpdated = date.toString();
 
+  const tableData = results.map((data, i) => {
+    return(
+          <tr key={i}>
+            <td><div img="{data.countryInfo.flag}"></div></td>
+            <td>{data.country}</td>
+            <td>{data.cases}</td>
+            <td>{data.active}</td>
+            <td>{data.recovered}</td>
+            <td>{data.deaths}</td>
+          </tr>
+    )}
+  );
 
   return(
   <div className="App">
@@ -86,6 +98,21 @@ function App() {
           </Card.Footer>
         </Card>
       </CardDeck>
+      <br/>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Country</th>
+            <th>Total Cases</th>
+            <th>Cases today</th>
+            <th>Recovered</th>
+            <th>Death</th>
+          </tr>
+        </thead>
+        <br/>
+        <tbody>{tableData}</tbody>
+      </Table>
     </div>
   );
 }
