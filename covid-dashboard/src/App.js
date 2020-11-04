@@ -33,7 +33,9 @@ function App() {
   const lastUpdated = date.toString();
 
   const filterCountries = results.filter(item => {
-    return searchCountries !== "" ? item.country.includes(searchCountries) :item;
+    return searchCountries !== "" 
+    ? item.country.toString().toLowerCase().includes(searchCountries.toString().toLowerCase()) 
+    :item;
   });
 
   const tableData = filterCountries.map((data, i) => {
@@ -70,7 +72,7 @@ function App() {
       <p className="text">
         Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
       <br/>
-      The following data has been recently updated at: {latest.cases}
+      The following data has been recently updated at: {lastUpdated}
       </p>
       <br/>
       <div className="container">
