@@ -12,7 +12,9 @@ function App() {
   const[latest, setLatest] = useState([]);
   const[results, setResults] = useState([]);
   const[searchCountries, setSearchCountries] = useState("");
+  const covidImg = <img className="img" src={covid} alt="Covid image"/>;
 
+  //GET data from API
   useEffect(() => {
     axios
     .all([
@@ -29,15 +31,18 @@ function App() {
       });
   },[]);
 
+  //Change date format
   const date = new Date(parseInt(latest.updated));
   const lastUpdated = date.toString();
 
+  //Filter to search countries
   const filterCountries = results.filter(item => {
     return searchCountries !== "" 
     ? item.country.toString().toLowerCase().includes(searchCountries.toString().toLowerCase()) 
     :item;
   });
 
+  //Using data from API and displaying filtered data
   const tableData = filterCountries.map((data, i) => {
     return(
           <tr key={i}>
@@ -53,15 +58,6 @@ function App() {
     )}
   );
 
-  var queries =[{
-    columns: 2,
-    query: 'min-width: 500px'
-  }, {
-    columns: 3,
-    query: 'min-width: 1000px'
-  }];
-
-  const covidImg = <img className="img" src={covid} alt="Covid image"/>;
 
   return(
   <div className="App">
