@@ -145,7 +145,7 @@ function App() {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Flag</th>
             <th>Country</th>
             <th>Total Cases</th>
             <th>Cases today</th>
