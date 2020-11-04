@@ -24,9 +24,9 @@ After you have all the files downloaded:
 
 **Step 3:** In the terminal install the following:
 
-  > **1. Bootstrap: ** npm install react-bootstrap bootstrap
+  > **1. Bootstrap:** npm install react-bootstrap bootstrap
 
-  > **2. Axios: ** npm install axios
+  > **2. Axios:** npm install axios
 
 
 ## Built With
