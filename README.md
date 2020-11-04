@@ -1,6 +1,6 @@
-# covid-19-dashboard
+# Covid-19-dashboard
 
-> **covid-19-dashboard** is a single page application(SPA) created using React-JS to visualize Covid-19 statistics around the world. 
+> **Covid-19-dashboard** is a single page application(SPA) created using React-JS to visualize Covid-19 statistics around the world. 
 
 
 ## Author
