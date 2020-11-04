@@ -1,11 +1,37 @@
+import React, { useEffect, useState } from "react";
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Card from 'react-bootstrap/Card';
 import CardDeck from "react-bootstrap/CardDeck";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Table from 'react-bootstrap/Table'
+import axios from "axios";
 
 function App() {
+  const[latest, setLatest] = useState([]);
+  const[results, setResults] = useState([]);
+
+  useEffect(() => {
+    axios
+    .all([
+      axios.get("https://corona.lmao.ninja/v2/all"),
+      axios.get("https://corona.lmao.ninja/v2/countries?sort=country")
+    ])
+      
+      .then(responseArr => {
+        setLatest(responseArr[0].data);
+        setResults(responseArr[1].data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },[]);
+
+  const date = new Date(parseInt(latest.updated));
+  const lastUpdated = date.toString();
+
+
   return(
-  <div>
+  <div className="App">
       <br/>
       <h2 style={{textAlign: "center"}}>COVID-19 Dashboard</h2>
       <br/>
@@ -20,11 +46,11 @@ function App() {
           <Card.Body>
             <Card.Title>Cases</Card.Title>
             <Card.Text>
-              xyz
+            {latest.cases}
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <small>Last updated </small>
+            <small>Last updated {lastUpdated}</small>
           </Card.Footer>
         </Card>
         <Card 
@@ -36,11 +62,11 @@ function App() {
           <Card.Body>
             <Card.Title>Deaths</Card.Title>
             <Card.Text>
-            xyz
+            {latest.deaths}
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <small>Last updated 3 mins ago</small>
+            <small>Last updated {lastUpdated}</small>
           </Card.Footer>
         </Card>
         <Card 
@@ -51,9 +77,12 @@ function App() {
         >
           <Card.Body>
             <Card.Title>Recovered</Card.Title>
+            <Card.Text>
+              {latest.recovered}
+            </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <small>xyz</small>
+            <small>Last updated {lastUpdated}</small>
           </Card.Footer>
         </Card>
       </CardDeck>
